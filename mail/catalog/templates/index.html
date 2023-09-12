@@ -1,0 +1,14 @@
+{% extends "base0.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 col-sm-12 text-center">
+            <p class="mt-9 lead">Добро пожаловать на почту!</p>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="{% url 'login' %}" class="btn btn-light mr-2">Вход</a>
+                <a href="{% url 'register' %}" class="btn btn-dark">Регистрация</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

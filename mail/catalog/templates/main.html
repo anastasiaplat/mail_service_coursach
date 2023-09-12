@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Добро пожаловать, {{ user.username }}!</h2>
+    {% if request.user.is_superuser %}
+        <ul>
+            <li>Количество пользователей:{{ num_users }}</li>
+            <li>Количество писем: {{ num_letters }}</li>
+            <li class="mr-2"><a href="{% url 'export_users' %}">Выгрузить в excel пользователей</a></li>
+            <li class="mr-2"><a href="{% url 'export_letters' %}">Выгрузить в excel письма</a></li>
+        </ul>
+{% endif %}
+<p></p>
+<h3>Входящие письма: {{ num_input }} </h3>
+{% if letters %}
+{% load static %}
+    {% for letter in letters %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ letter.author.profile.image.url }}" height=100 width=100>
+                <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ letter.author }}</a>
+                <small class="text-muted">{{ letter.date_sended|date:"F d, Y" }}</small>
+                </div>
+              <p><a class="article-title" href="{% url 'letter_detail' letter.id %}">{{ letter.content }}</a></p>
+            </div>
+            </article>
+    {% endfor %}
+{% else %}
+    <p>У Вас нет входящих писем.</p>
+{% endif %}
+{% endblock content %}

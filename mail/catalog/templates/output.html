@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+{% if letters %}
+    <h2>Отправленные письма: {{ num_output }} </h2>
+{% load static %}
+    {% for letter in letters %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ letter.author.profile.image.url }}" height=100 width=100>
+                <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ letter.to_user }}</a>
+                <small class="text-muted">{{ letter.date_sended|date:"F d, Y" }}</small>
+                </div>
+              <p><a class="article-title" href="{% url 'letter_detail' letter.id %}">{{ letter.content }}</a></p>
+            </div>
+            </article>
+    {% endfor %}
+{% else %}
+    <p>Вы еще не отправили ни одного письма.</p>
+{% endif %}
+{% endblock content %}
+{% block pagination %}
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.path }}?page={{
+                        page_obj.previous_page_number }}
+                        ">Предыдущая</a>
+                {% endif %}
+                <span class="page-current">
+                    Страница {{ page_obj.number }} из
+                        {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{{ request.path }}?page={{
+                        page_obj.next_page_number }}
+                        ">Следующая</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

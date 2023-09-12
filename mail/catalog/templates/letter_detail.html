@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ letter.author.profile.image.url }}" height=100 width=100>
+    <div class="media-body">
+      <div class="article-metadata">
+        <strong>Отправитель:</strong> <a class="mr-2" href="#"> {{ letter.author }}</a>
+        <strong>Кому:</strong> <a class="mr-2" href="#"> {{ letter.to_user }}</a>
+        <small class="text-muted">{{ object.date_sended|date:"F d, Y" }}</small>
+          <div>
+          </div>
+      </div>
+            <p class="article-content"><strong>Тема сообщения: </strong>{{ object.theme }}</p>
+            <p class="article-title"><strong>Содержание: </strong>{{ object.content }}</p>
+    </div>
+  </article>
+{% endblock content %}

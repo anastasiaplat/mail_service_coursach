@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Входящие письма: {{ num_input }} </h2>
+ {% if letters %}
+{% load static %}
+    {% for letter in letters %}
+            <article class="media content-section">
+                <img class="rounded-circle article-img" src="{{ letter.author.profile.image.url }}" height=100 width=100>
+                <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ letter.author }}</a>
+                <small class="text-muted">{{ letter.date_sended|date:"F d, Y" }}</small>
+                </div>
+              <p><a class="article-title" href="{% url 'letter_detail' letter.id %}">{{ letter.content }}</a></p>
+            </div>
+            </article>
+    {% endfor %}
+{% else %}
+    <p>У Вас нет входящих писем.</p>
+{% endif %}
+{% endblock content %}
