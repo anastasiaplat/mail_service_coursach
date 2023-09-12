@@ -1,4 +1,4 @@
-# mail_service_coursach
+# Mail service coursach on Django
 Information system mail service as my course (3) project for uni (KSUAE) using Django framework. 
 Subject's name is "Methods and tools for creating information systems and technologies" (MaTfCISaT or MiSPISiT on Russian).
 
